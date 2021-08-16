@@ -1,0 +1,28 @@
+{% extends "capstone/layout.html" %}
+{% block body %}
+<style>
+    li{
+        color: black;
+    }
+    .cate{
+        color: black;
+    }
+</style>
+<div class="container">
+    <h2>Year Of Release {{catss}}</h2>
+
+</div>
+<div class="container">
+    <ul>
+        {% for i in items %}
+         <li>
+              <div class="cate">
+                <a href="{% url 'categoryss' i.categoryss %}">{{i.categoryss}}</a>
+              </div>
+            </li>
+        {% endfor %}
+    </ul>
+    
+
+</div>
+{% endblock %}

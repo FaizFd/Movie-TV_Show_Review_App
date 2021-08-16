@@ -1,0 +1,108 @@
+{% extends "capstone/layout.html" %}
+{% block body %}
+<div class="container">
+    <h2>Create listing</h2>
+
+</div>
+<div class="container">
+    <form action="{% url 'submit' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Title</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title of the lisiting..." name="title" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Description..." name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Cast</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Cast..." name="cast" required></textarea>
+        </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Genre</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="category" required>
+              <option>Comedy</option>
+              <option>Sci-Fi</option>
+              <option>Horror</option>
+              <option>Romance</option>
+              <option>Action</option>
+              <option>Thriller</option>
+              <option>Drama</option>
+              <option>Mystery</option>
+              <option>Crime</option>
+              <option>Animation</option>
+              <option>Romance-Comedy</option>
+              <option>Action-Comedy</option>
+              <option>Superhero</option>
+              <option>Adventure</option>
+              <option>Fantasy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Categories</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="categorys" required>
+              <option>Movies</option>
+              <option>TV Shows</option>
+              <option>Web Series</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Categoriess</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="categoryss" required>
+              <option>2021</option>
+              <option>2020</option>
+              <option>2019</option>
+              <option>2018</option>
+            </select>
+          </div>  
+        <div class="form-group">
+            <label for="exampleFormControlInput1">User Rating</label>
+            <input type="number" step="any" min="0" max="10" class="form-control" id="exampleFormControlInput1" placeholder="Rating" name="price" required>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Imdb Rating</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Imdb Rating" name="title1" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Imdb link</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Imdb link" name="title2" required>
+          </div>
+        
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Image link (optional)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://blah-blah.jpg..." name="link">
+          </div>
+          
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Image link 2 (optional)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://blah-blah.jpg..." name="img">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Image link 3 (optional)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://blah-blah.jpg..." name="imgg">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Watch on: link (optional)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://blah-blah.com" name="links">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Trailer Link (optional)</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://blah-blah.com" name="trailer">
+          </div>
+            
+
+        <button class="btn btn-outline-info" type="submit">Submit</button>
+
+      </form>
+</div>
+{% endblock %}

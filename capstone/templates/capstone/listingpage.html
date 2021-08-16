@@ -1,0 +1,401 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+<style>
+  .wtchl a{
+    position: relative;
+   text-transform: uppercase;
+   background: #111;
+   color: #fff;
+   font-weight: 500;
+   letter-spacing: 2px;
+   text-decoration: none;
+   display: inline-block;
+   padding: 10px 15px;
+  }
+  .webst a{
+    text-decoration: none;
+  }
+  .content a{
+   position: relative;
+   text-transform: uppercase;
+   background: #111;
+   color: #fff;
+   font-weight: 500;
+   letter-spacing: 2px;
+   text-decoration: none;
+   display: inline-block;
+   padding: 10px 15px;
+  }
+  .content a:hover{
+    background: #fff;
+   color: #111;
+   border: 2px solid #555555;
+  }
+  .wtchl a:hover{
+    background: #fff;
+   color: #111;
+   border: 2px solid #555555;
+  }
+  .trailer{
+   position: fixed;
+   top: 50%;
+   bottom: 50%;
+   transform: translate(-9.1%,-50%);
+   z-index: 10000;
+   background: rgba(0,0,0,0.95);
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   visibility: hidden;
+   opacity: 0;
+  }
+  .trailer.active{
+   visibility: visible; 
+   opacity: 1;
+  }
+  .trailer iframe{
+    position: relative;
+    max-width: 2000px;
+    outline: none;
+  }
+  .close{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    filter: invert(1);
+    max-width: 32px;
+  }
+  @media (max-width:2000px)
+  {
+    .trailer iframe 
+    {max-width: 90%;}
+  }
+  
+.containers h2{
+  text-align: center;
+}
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: black;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+</style>
+<body>
+<div class="containers">
+    <br><br><br><h2>Title: {{i.title}}</h2>
+    <br><br><div class="container">
+      <div class="mySlides">
+        <div class="numbertext">1 / 3</div>
+        <img src="{{i.link}}" style="width:auto; height: auto; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+      </div>
+    
+      <div class="mySlides">
+        <div class="numbertext">2 / 3</div>
+        <img src="{{i.img}}" style="width:auto; height: auto;max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+      </div>
+    
+      <div class="mySlides">
+        <div class="numbertext">3 / 3</div>
+        <img src="{{i.imgg}}" style="width:auto; height: auto; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+      </div>
+        
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+
+      <br>
+    
+      <div class="caption-container">
+        <h3 id="caption">{{i.title}}</h3>
+      </div>
+
+      <br>
+    
+      <div class="row">
+        <div class="column">
+          <img class="demo cursor" src="{{i.link}}" style="width: auto; height: 100px;" onclick="currentSlide(1)" alt="{{i.title}}">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="{{i.img}}" style="width: auto; height: 100px;" onclick="currentSlide(2)" alt="{{i.title}}">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="{{i.imgg}}" style="width: auto; height: 100px;" onclick="currentSlide(3)" alt="{{i.title}}">
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+    </script>
+    </div>
+      <script type="text/javascript">
+        function toggle(){
+          var trailer= document.querySelector(".trailer")
+          
+          var iframe= document.querySelector("iframe")
+          trailer.classList.toggle("active");
+          iframe.pause();
+          iframe.currentTime = 0;
+        }
+      </script>
+    <br>
+    
+    <div class="container">
+      <br><br>
+    <div class="content">
+      <a href="#" onclick="toggle();">Watch Trailer</a>
+      </div>
+      <div class="trailer">
+        <iframe width="853" height="480" src="{{i.trailer}}" controls="true" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>></iframe>
+        <img src="data:image/png;base64,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" class="close" onclick="toggle();">
+      </div>
+      <br>
+      <p><b>Synopsis: </b>{{i.description}}</p>
+
+    <p><b>Cast: </b>{{i.cast}}</p>
+    <div class="webst">
+    <p><b>This Movie/TV Show is available on: <a href="{{i.links}}" target="_blank">Click Here</a></b></p>
+    </div>
+    <br>
+    <h3>User Rating: {{i.price}}</h3>
+    <br><h3>Imdb Rating: <span class="imdbRatingPlugin" data-user="ur93760337" data-title="{{i.title1}}" data-style="p1"><a href="{{i.title2}}" target="_blank"><img src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png" alt=" Black Widow
+(2021) on IMDb" />
+</a></span><script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/js/rating.js";stags.parentNode.insertBefore(js,stags);})(document,"script","imdb-rating-api");</script></h3>
+    <br>
+    {% if user.username %}
+    <p>
+      <div class="wtchl">
+      {% if added %}
+      <a href="{% url 'removecart' i.id %}">Remove from Watchlist</a>
+      {% else %}
+      <a href="{% url 'addcart' i.id %}">Add to Watchlist</a>
+      {% endif %}
+      </div>
+    </p>
+    {% if user.is_authenticated %}
+    {% else %}
+    <h3>Login to add to Watchlist</h3>
+    {% endif %}
+
+    <br>
+    <br>
+    {% endif %}
+    {% if user.username %}
+    {% if owner %}
+    <br>
+    {% endif %}
+    {% endif %}
+    <br>
+    <p><b>Details:</b>
+    <ul>
+        <li><b>Genre: </b>{{i.category}}</li>
+        <li><b>Category: </b>{{i.categorys}}</li>
+        <li><b>Year of Release: </b>{{i.categoryss}}</li>
+        <li><b>Created on:</b>{{i.time}}</li>
+    </ul>
+    </p>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+    {% endif %}
+    {% if errorgreen %}
+    <div class="alert alert-success" role="alert">
+        {{errorgreen}}
+      </div>
+    {% endif %}
+    {% if user.username %}
+
+    </div>
+    <br>
+    <div class="container">
+      <form action="{% url 'cmntsubmit' i.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1"><b>Write a review:</b></label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment" placeholder="Write your review here..." required></textarea>
+        </div>
+        <button class="btn btn-secondary" type="submit">Submit</button>
+      </form>
+    </div>
+    <br>
+    {% endif %}
+    <br>
+    <div class="container">
+    {% if comments %}
+    <h3>Review:</h3>
+          
+          {% for c in comments %}
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{c.user}}</h5>
+                  <p class="card-text">{{c.comment}}</p>
+                  <p class="card-text"><small class="text-muted">{{c.time}} UTC</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+           {% endfor %}
+           
+    </div>
+    {% endif %}
+</div>
+</div>
+
+<br><br><br><div class="footer-dark">
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-6 col-md-3 item">
+                  <h3>Services</h3>
+                  <ul>
+                      <li><a href="#">Web design</a></li>
+                      <li><a href="#">Development</a></li>
+                      <li><a href="#">Hosting</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-6 col-md-3 item">
+                  <h3>About</h3>
+                  <ul>
+                      <li><a href="#">Company</a></li>
+                      <li><a href="#">Team</a></li>
+                      <li><a href="#">Careers</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-6 item text">
+                  <h3>Exceptional Entertainment</h3>
+                  <p>Exceptional Entertainment is a website that allows users to view their favourite Movies and Tv shows ratings and view the reviews of other people. It helps them find where their favourite movies and tv shows is available to watch. It also gives them IMDB ratings and the cast of the movie/tv show. (This Site has been created by Faiz Dhanani) </p>
+              </div>
+              <div class="col item social"><a href="https://www.linkedin.com/in/faiz-dhanani" target="_blank"><i class="icon ion-social-linkedin"></i></a><a href="https://twitter.com/itsyeboifd" target="_blank"><i class="icon ion-social-twitter"></i></a><a href="mailto: faizdhanani02@gmail.com" target="_blank"><i class="icon ion-social-google"></i></a><a href="https://www.instagram.com/exceptionment/" target="_blank"><i class="icon ion-social-instagram"></i></a></div>
+          </div>
+          <p class="copyright">Exceptional Entertainment © 2021</p>
+      </div>
+  </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+

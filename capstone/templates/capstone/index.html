@@ -1,0 +1,169 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style> 
+  .carousel-inner img {  
+    width: auto;
+    height: 245px;
+    max-height: 245px;
+    margin: auto; 
+    display: block;
+  }
+
+  .carousel-caption{
+    color: black;
+    text-align: left;
+  }
+
+h3{
+  font-size: 40px;
+}
+  .container{
+    display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  align-content: center;
+  justify-content: center;
+
+  }
+  .container2{
+    text-align: center;
+  }
+  .carousel-control-prev{
+    color: red;
+  }
+  h2{
+    color: black;
+    text-align: center;
+  }
+</style>
+<div class="main">
+  
+<br><br><br> <h2>TRENDING NOW</h2>
+  
+<br><br><div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_web_m_1x/sources/r1/cms/prod/1681/1011681-h-ac6ee255f074" alt="Trending Page 1">
+        <div class="carousel-caption" style="color: black;">
+          <h3>Loki</h3>
+          <a href="http://127.0.0.1:8000/listings/1">Learn More</a>
+          </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://thedirect.s3.amazonaws.com/media/article_full/bw.jpg" alt="Tranding Page 2" width="600" height="400">
+      <div class="carousel-caption" style="color: black;">
+       <h3>Black Widow</h3>
+       <a href="http://127.0.0.1:8000/listings/2">Learn More</a>
+       </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.tvinsider.com/wp-content/uploads/2021/07/marvel-what-if-poster-disney-plus-1014x570.jpg" class="card-img" alt="Trending Page 3">
+      <div class="carousel-caption">
+      <h3>What If...?</h3>
+      <a href="http://127.0.0.1:8000/listings/5">Learn More</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+<br><br><div class="container2">
+    <h2>All Movies & TV Shows</h2>
+</div>
+<div class="container" id="listings">
+    {% for i in items %}
+    <div class="card mb-3" style="max-width: 410px;" id="card-listings">
+        <div class="row no-gutters">
+          <div class="col-md-10">
+            <img src="{{i.link}}" class="card-img" alt="..." style="width: 100%;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <p class="card-text-2">{{i.category}}</p>
+              <h5 class="card-title">{{i.title}}</h5>
+              <p class="card-text">{{i.price}}</p>
+              <br><a href="{% url 'listingpage' i.id %}"><button class="btn btn-outline-danger">Learn More</button></a>  
+              <p class="card-text"><small class="text-muted">{{i.categoryss}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>  
+      {% endfor %}
+</div>
+<div class="d-flex justify-content-center">
+  {% if items.has_other_pages %}
+  <ul class="pagination">
+    {% if items.has_previous %}
+      <li><a href="?page={{ items.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in items.paginator.page_range %}
+      {% if items.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ items.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div>
+
+<br><br><br><div class="footer-dark">
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-6 col-md-3 item">
+                  <h3>Services</h3>
+                  <ul>
+                      <li><a href="#">Web design</a></li>
+                      <li><a href="#">Development</a></li>
+                      <li><a href="#">Hosting</a></li>
+                  </ul>
+              </div>
+              <div class="col-sm-6 col-md-3 item">
+                  <h3>About</h3>
+                  <ul>
+                      <li><a href="#">Company</a></li>
+                      <li><a href="#">Team</a></li>
+                      <li><a href="#">Careers</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-6 item text">
+                  <h3>Exceptional Entertainment</h3>
+                  <p>Exceptional Entertainment is a website that allows users to view their favourite Movies and Tv shows ratings and view the reviews of other people. It helps them find where their favourite movies and tv shows is available to watch. It also gives them IMDB ratings and the cast of the movie/tv show. (This Site has been created by Faiz Dhanani) </p>
+              </div>
+              <div class="col item social"><a href="https://www.linkedin.com/in/faiz-dhanani" target="_blank"><i class="icon ion-social-linkedin"></i></a><a href="https://twitter.com/itsyeboifd" target="_blank"><i class="icon ion-social-twitter"></i></a><a href="mailto: faizdhanani02@gmail.com" target="_blank"><i class="icon ion-social-google"></i></a><a href="https://www.instagram.com/exceptionment/" target="_blank"><i class="icon ion-social-instagram"></i></a></div>
+          </div>
+          <p class="copyright">Exceptional Entertainment © 2021</p>
+      </div>
+  </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  
+{% endblock %}
